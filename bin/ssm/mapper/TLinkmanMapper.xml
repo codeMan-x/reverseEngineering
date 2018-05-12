@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.mapper.TLinkmanMapper">
+  <resultMap id="BaseResultMap" type="ssm.pojo.TLinkman">
+    <id column="lkm_id" jdbcType="INTEGER" property="lkmId" />
+    <result column="lkm_name" jdbcType="VARCHAR" property="lkmName" />
+    <result column="lkm_gender" jdbcType="VARCHAR" property="lkmGender" />
+    <result column="lkm_phone" jdbcType="VARCHAR" property="lkmPhone" />
+    <result column="clid" jdbcType="INTEGER" property="clid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lkm_id, lkm_name, lkm_gender, lkm_phone, clid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_linkman
+    where lkm_id = #{lkmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_linkman
+    where lkm_id = #{lkmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ssm.pojo.TLinkman">
+    insert into t_linkman (lkm_id, lkm_name, lkm_gender, 
+      lkm_phone, clid)
+    values (#{lkmId,jdbcType=INTEGER}, #{lkmName,jdbcType=VARCHAR}, #{lkmGender,jdbcType=VARCHAR}, 
+      #{lkmPhone,jdbcType=VARCHAR}, #{clid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="ssm.pojo.TLinkman">
+    insert into t_linkman
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lkmId != null">
+        lkm_id,
+      </if>
+      <if test="lkmName != null">
+        lkm_name,
+      </if>
+      <if test="lkmGender != null">
+        lkm_gender,
+      </if>
+      <if test="lkmPhone != null">
+        lkm_phone,
+      </if>
+      <if test="clid != null">
+        clid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lkmId != null">
+        #{lkmId,jdbcType=INTEGER},
+      </if>
+      <if test="lkmName != null">
+        #{lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmGender != null">
+        #{lkmGender,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmPhone != null">
+        #{lkmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="clid != null">
+        #{clid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ssm.pojo.TLinkman">
+    update t_linkman
+    <set>
+      <if test="lkmName != null">
+        lkm_name = #{lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmGender != null">
+        lkm_gender = #{lkmGender,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmPhone != null">
+        lkm_phone = #{lkmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="clid != null">
+        clid = #{clid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where lkm_id = #{lkmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ssm.pojo.TLinkman">
+    update t_linkman
+    set lkm_name = #{lkmName,jdbcType=VARCHAR},
+      lkm_gender = #{lkmGender,jdbcType=VARCHAR},
+      lkm_phone = #{lkmPhone,jdbcType=VARCHAR},
+      clid = #{clid,jdbcType=INTEGER}
+    where lkm_id = #{lkmId,jdbcType=INTEGER}
+  </update>
+</mapper>
